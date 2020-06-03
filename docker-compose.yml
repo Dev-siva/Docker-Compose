@@ -1,0 +1,28 @@
+version: '2'
+services:
+  fe:
+    image: kammana/emp-fe-comp:1.0
+    container_name: emp-fe
+    ports:
+     - "4200:4200"
+    networks:
+      - HPE-App
+  mongodb:
+    container_name: mongodb
+    image: "mongo:latest"
+    networks:
+      - HPE-App
+    volumes:
+      - mongodb:/data/db
+  emp-api:
+    container_name: empapi
+    image: kammana/boot-api:5.0
+    ports:
+     - "8080:8080"
+    networks:
+      - HPE-App
+volumes:
+  mongodb:
+networks:
+  HPE-App:
+    driver: bridge
